@@ -38,7 +38,7 @@ export const conferenceData = {
       {
         title: "About the School of Computer Science and Applications (SCSA)",
         points: [
-          "A leading department under S-VYASA School of Advanced Studies",
+          "A leading department under S-VYASA School of Computer Science and Applications",
           "Focuses on cybersecurity, artificial intelligence, cloud computing, and data science",
           "Provides strong theoretical and practical foundations in computing",
           "Trains students to excel in emerging digital technologies",
@@ -134,32 +134,109 @@ export const conferenceData = {
 
   // 🧑‍🏫 COMMITTEES (cleaned / consolidated)
 committees: {
+  // 🔹 CHIEF PATRON
+  chiefPatron: [
+    {
+      name: "Dr. H. R. Nagendra",
+      profession: "President",
+      college: "S-VYASA Deemed to be University",
+    },
+  ],
+
+  // 🔹 PATRONS
+  patron: [
+    {
+      name: "Prof. K. Subrahmanyam",
+      profession: "Chancellor",
+      college: "S-VYASA Deemed to be University",
+    },
+    {
+      name: "Dr. B. R. Ramakrishna",
+      profession: "Pro-Chancellor",
+      college: "S-VYASA Deemed to be University",
+    },
+    {
+      name: "Dr. N. K. Manjunath Sharma",
+      profession: "Vice-Chancellor",
+      college: "S-VYASA Deemed to be University",
+    },
+    {
+      name: "Prof. S. Siva Sankara Sai",
+      profession: "Registrar",
+      college: "S-VYASA Deemed to be University",
+    },
+    {
+      name: "Mr. Anish Antony",
+      profession: "Executive Director",
+      college: "School of Computer Science and Applications, S-VYASA Deemed to be University",
+    },
+  ],
+
+  // 🔹 HONORARY CHAIRS
+  honoraryChairs: [
+    {
+      name: "Dr. Sridhar S",
+      profession: "Director, Academics",
+      college: "S-VYASA Deemed to be University",
+    },
+    {
+      name: "Dr. Karthiyayini O",
+      profession: "Director, Academics",
+      college: "S-VYASA Deemed to be University",
+    },
+  ],
+
+  // 🔹 GENERAL CHAIR
+  generalChair: [
+    {
+      name: "Dr. Sachin Sharma",
+      profession: "Dean",
+      college: "School of Computer Science and Applications, S-VYASA Deemed to be University",
+    },
+  ],
+
+  // 🔹 CONFERENCE CHAIRS
+  conferenceChairs: [
+    {
+      name: "Dr. Bharathi S",
+      profession: "Associate Dean",
+      school: "School of Computer Science and Applications",
+      college: "S-VYASA Deemed to be University",
+    },
+    {
+      name: "Dr. Jai Singh W",
+      profession: "Professor",
+      school: "School of Computer Science and Applications",
+      college: "S-VYASA Deemed to be University",
+    },
+  ],
+
   // 🔹 ORGANISING CHAIRS
   organisingChairs: [
     {
       name: "Dr K Harshavardhana Reddy",
       profession: "",
-      college: "School of Advanced Studies, S-VYASA Deemed to be University",
+      college: "School of Computer Science and Applications, S-VYASA Deemed to be University",
     },
     {
       name: "Dr .B Vasumathi",
       profession: "",
-      college: "School of Advanced Studies, S-VYASA Deemed to be University",
+      college: "School of Computer Science and Applications, S-VYASA Deemed to be University",
     },
     {
       name: "Dr. Rajesh L",
       profession: "",
-      college: "School of Advanced Studies, S-VYASA Deemed to be University",
+      college: "School of Computer Science and Applications, S-VYASA Deemed to be University",
     },
     {
       name: "Ms. Shilpashree S",
       profession: "",
-      college: "School of Advanced Studies, S-VYASA Deemed to be University",
+      college: "School of Computer Science and Applications, S-VYASA Deemed to be University",
     },
     {
       name: "Dr.Ashvini Alashetty",
       profession: "",
-      college: "School of Advanced Studies, S-VYASA Deemed to be University",
+      college: "School of Computer Science and Applications, S-VYASA Deemed to be University",
     },
   ],
 
@@ -168,144 +245,80 @@ committees: {
     {
       name: "Dr. Bharathi S",
       profession: "",
-      college: "School of Advanced Studies, S-VYASA Deemed to be University",
+      college: "School of Computer Science and Applications, S-VYASA Deemed to be University",
     },
     {
       name: "Ms.Shilpashree S",
       profession: "",
-      college: "School of Advanced Studies, S-VYASA Deemed to be University",
+      college: "School of Computer Science and Applications, S-VYASA Deemed to be University",
     },
     {
       name: "Mr.Balakiran S",
       profession: "",
-      college: "School of Advanced Studies, S-VYASA Deemed to be University",
+      college: "School of Computer Science and Applications, S-VYASA Deemed to be University",
     },
     {
       name: "Mr Preetham Paul Socrates P",
       profession: "",
-      college: "School of Advanced Studies, S-VYASA Deemed to be University",
+      college: "School of Computer Science and Applications, S-VYASA Deemed to be University",
     },
     {
       name: "Ms.Harshitha J",
       profession: "",
-      college: "School of Advanced Studies, S-VYASA Deemed to be University",
+      college: "School of Computer Science and Applications, S-VYASA Deemed to be University",
     },
   ],
 
   // 🔹 TECHNICAL REVIEW CHAIRS
   technicalReviewChairs: [
-    {
-      name: "Dr .B Vasumathi",
-      profession: "",
-      college: "School of Advanced Studies, S-VYASA Deemed to be University",
-    },
-    {
-      name: "Dr.Geethanjali B",
-      profession: "",
-      college: "School of Advanced Studies, S-VYASA Deemed to be University",
-    },
-    {
-      name: "Dr.Ashvini Alashetty",
-      profession: "",
-      college: "School of Advanced Studies, S-VYASA Deemed to be University",
-    },
-    {
-      name: "Dr Divya M O",
-      profession: "",
-      college: "School of Advanced Studies, S-VYASA Deemed to be University",
-    },
-    {
-      name: "Ms. Pankaja Benkal",
-      profession: "",
-      college: "School of Advanced Studies, S-VYASA Deemed to be University",
-    },
-    {
-      name: "Mr Ajith",
-      profession: "",
-      college: "School of Advanced Studies, S-VYASA Deemed to be University",
-    },
-    {
-      name: "Mr Mukul",
-      profession: "",
-      college: "School of Advanced Studies, S-VYASA Deemed to be University",
-    },
+    { name: "Dr .B Vasumathi", profession: "", college: "School of Computer Science and Applications, S-VYASA Deemed to be University" },
+    { name: "Dr.Geethanjali B", profession: "", college: "School of Computer Science and Applications, S-VYASA Deemed to be University" },
+    { name: "Dr.Ashvini Alashetty", profession: "", college: "School of Computer Science and Applications, S-VYASA Deemed to be University" },
+    { name: "Dr Divya M O", profession: "", college: "School of Computer Science and Applications, S-VYASA Deemed to be University" },
+    { name: "Ms. Pankaja Benkal", profession: "", college: "School of Computer Science and Applications, S-VYASA Deemed to be University" },
+    { name: "Mr Ajith", profession: "", college: "School of Computer Science and Applications, S-VYASA Deemed to be University" },
+    { name: "Mr Mukul", profession: "", college: "School of Computer Science and Applications, S-VYASA Deemed to be University" },
   ],
 
-  // 🔹 PLAGIARISM CHECKS CHAIRS
+  // 🔹 PLAGIARISM CHECK CHAIRS
   plagiarismCheckChairs: [
-    {
-      name: "Ms. Prathima D",
-      profession: "",
-      college: "School of Advanced Studies, S-VYASA Deemed to be University",
-    },
-    {
-      name: "Ms.Neethu K",
-      profession: "",
-      college: "School of Advanced Studies, S-VYASA Deemed to be University",
-    },
-    {
-      name: "Ms. Sreeshma Mohan",
-      profession: "",
-      college: "School of Advanced Studies, S-VYASA Deemed to be University",
-    },
-    {
-      name: "Ms.Srujana B",
-      profession: "",
-      college: "School of Advanced Studies, S-VYASA Deemed to be University",
-    },
-    {
-      name: "Ms Rakshita Gurav",
-      profession: "",
-      college: "School of Advanced Studies, S-VYASA Deemed to be University",
-    },
-    {
-      name: "Ms.Moushreeta Debroy",
-      profession: "",
-      college: "School of Advanced Studies, S-VYASA Deemed to be University",
-    },
+    { name: "Ms. Prathima D", profession: "", college: "School of Computer Science and Applications, S-VYASA Deemed to be University" },
+    { name: "Ms.Neethu K", profession: "", college: "School of Computer Science and Applications, S-VYASA Deemed to be University" },
+    { name: "Ms. Sreeshma Mohan", profession: "", college: "School of Computer Science and Applications, S-VYASA Deemed to be University" },
+    { name: "Ms.Srujana B", profession: "", college: "School of Computer Science and Applications, S-VYASA Deemed to be University" },
+    { name: "Ms Rakshita Gurav", profession: "", college: "School of Computer Science and Applications, S-VYASA Deemed to be University" },
+    { name: "Ms.Moushreeta Debroy", profession: "", college: "School of Computer Science and Applications, S-VYASA Deemed to be University" },
   ],
 
   // 🔹 FINANCE CHAIRS
   financeChairs: [
-    {
-      name: "Dr.Rajesh L",
-      profession: "",
-      college: "School of Advanced Studies, S-VYASA Deemed to be University",
-    },
-    {
-      name: "Ms.Akshatha Rithesh",
-      profession: "",
-      college: "School of Advanced Studies, S-VYASA Deemed to be University",
-    },
+    { name: "Dr.Rajesh L", profession: "", college: "School of Computer Science and Applications, S-VYASA Deemed to be University" },
+    { name: "Ms.Akshatha Rithesh", profession: "", college: "School of Computer Science and Applications, S-VYASA Deemed to be University" },
   ],
 
   // 🔹 PRINTING & PUBLICATION CHAIRS
   printingPublicationChairs: [
-    { name: "Dr. Bharathi S", profession: "", college: "School of Advanced Studies, S-VYASA Deemed to be University" },
-    { name: "Dr. Jai Singh W", profession: "", college: "School of Advanced Studies, S-VYASA Deemed to be University" },
-    { name: "Ms Ramlakshmi B", profession: "", college: "School of Advanced Studies, S-VYASA Deemed to be University" },
-    { name: "Ms. Deepika C", profession: "", college: "School of Advanced Studies, S-VYASA Deemed to be University" },
-    { name: "Ms. Suganya Saravanan", profession: "", college: "School of Advanced Studies, S-VYASA Deemed to be University" },
-    { name: "Mr.Vaibhav Srivastav", profession: "", college: "School of Advanced Studies, S-VYASA Deemed to be University" },
-    { name: "Mr.Dhilip Raja P", profession: "", college: "School of Advanced Studies, S-VYASA Deemed to be University" },
-    { name: "Mr.Prasath P", profession: "", college: "School of Advanced Studies, S-VYASA Deemed to be University" },
+    { name: "Dr. Bharathi S", profession: "", college: "School of Computer Science and Applications, S-VYASA Deemed to be University" },
+    { name: "Dr. Jai Singh W", profession: "", college: "School of Computer Science and Applications, S-VYASA Deemed to be University" },
+    { name: "Ms Ramlakshmi B", profession: "", college: "School of Computer Science and Applications, S-VYASA Deemed to be University" },
+    { name: "Ms. Deepika C", profession: "", college: "School of Computer Science and Applications, S-VYASA Deemed to be University" },
+    { name: "Ms. Suganya Saravanan", profession: "", college: "School of Computer Science and Applications, S-VYASA Deemed to be University" },
+    { name: "Mr.Vaibhav Srivastav", profession: "", college: "School of Computer Science and Applications, S-VYASA Deemed to be University" },
+    { name: "Mr.Dhilip Raja P", profession: "", college: "School of Computer Science and Applications, S-VYASA Deemed to be University" },
+    { name: "Mr.Prasath P", profession: "", college: "School of Computer Science and Applications, S-VYASA Deemed to be University" },
   ],
 
-  // 🔹 ADVISORY CHAIRS
+  // 🔹 ADVISORY CHAIRS (advisoryCommittee merged)
   advisoryChairs: [
     {
       name: "Dr.Sacchidanand",
       profession: "Former Vice Chancellor",
       college: "Rajiv Gandhi University of Health & Science",
     },
-  ],
-
-  // 🔹 ADVISORY COMMITTEE (International + National Experts)
-  advisoryCommittee: [
     {
       name: "Dr. Deepa Shenoy",
       profession: "Professor, Former Chairman IEEE, Bengaluru Region",
-      college: "School of Advanced Studies, S-VYASA Deemed to be University",
+      college: "School of Computer Science and Applications, S-VYASA Deemed to be University",
     },
     {
       name: "Dr Balamurugan Easwaran",
@@ -330,7 +343,7 @@ committees: {
     {
       name: "Dr. Thangavel Murugan",
       profession: "",
-      college: "College of Information Technology, United Arab Emirates University, UAE",
+      college: "College of Information Technology, UAE University, UAE",
     },
     {
       name: "Dr. Aswath Babu .H",
@@ -348,8 +361,7 @@ committees: {
       college: "SKUAST, Jammu and Kashmir, India",
     },
   ],
-}
-,
+},
   // 🎯 SPONSORS
   sponsors: [
     { name: "Elsevier SSRN", role: "Digital Library / Publication Partner" },
