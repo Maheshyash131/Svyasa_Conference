@@ -1,130 +1,145 @@
 // src/components/SponsorsSection.jsx
 import React, { useState } from "react";
 import { conferenceData } from "../mockData";
-import { X, ExternalLink } from "lucide-react";
+import { X, ExternalLink, ChevronLeft, ChevronRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function SponsorsSection() {
-  const [selectedSponsor, setSelectedSponsor] = useState(null);
+  const sponsors = conferenceData.sponsors;
 
-  // Animation variants (clean & professional)
-  const cardVariant = {
-    hidden: { opacity: 0, scale: 0.8 },
-    visible: (i) => ({
-      opacity: 1,
-      scale: 1,
-      transition: {
-        duration: 0.4,
-        delay: i * 0.15, // stagger effect
-        ease: "easeOut",
-      },
-    }),
+  const CARD_WIDTH = 380; // wider card
+  const VISIBLE = 3;
+
+  // Infinite loop trick
+  const extended = [...sponsors, ...sponsors, ...sponsors];
+
+  const [pos, setPos] = useState(sponsors.length);
+  const [animDirection, setAnimDirection] = useState(0);
+
+  const move = (direction) => {
+    setAnimDirection(direction);
+
+    setTimeout(() => {
+      setPos((prev) => prev + direction);
+
+      setTimeout(() => {
+        if (pos + direction <= 0) {
+          setPos(sponsors.length);
+        }
+        if (pos + direction >= sponsors.length * 2) {
+          setPos(sponsors.length);
+        }
+      }, 250);
+    }, 10);
+  };
+
+  // CLICK DOT → GO TO THAT SLIDE
+  const goToSlide = (targetIndex) => {
+    const currentIndex = pos % sponsors.length;
+    const diff = targetIndex - currentIndex;
+    move(diff);
   };
 
   return (
     <motion.section
       id="sponsors"
-      className="bg-[#FFE9D6] py-16 md:py-20 text-[#4A2C00] overflow-hidden"
+      className="bg-[#FFE9D6] py-16 md:py-20 text-[#4A2C00]"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       transition={{ duration: 0.6 }}
     >
       {/* TITLE */}
-      <motion.div
-        className="text-center mb-10"
-        initial={{ opacity: 0, y: -20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-      >
-        <h2 className="text-3xl md:text-4xl font-bold text-[#FF7A00]">Sponsors & Partners</h2>
-      </motion.div>
-
-      {/* 🔥 Same Scroll for All Devices — Clean Animations */}
-      <div className="flex overflow-x-auto snap-x snap-mandatory no-scrollbar-x gap-6 px-4 py-6">
-        {conferenceData.sponsors.map((sponsor, index) => (
-          <motion.div
-            key={index}
-            custom={index}
-            variants={cardVariant}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="
-              min-w-[300px] md:min-w-[360px] lg:min-w-[400px]
-              bg-gradient-to-br from-[#FFF2E6] to-[#FFE1CC]
-              border border-[#FF7A00]/40 rounded-2xl shadow-md p-6 text-center 
-              cursor-pointer snap-center
-              transition-all duration-300
-            "
-            whileHover={{
-              scale: 1.04,
-              boxShadow: "0 0 25px rgba(255,122,0,0.4)",
-            }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => setSelectedSponsor(sponsor)}
-          >
-            <p className="text-xl md:text-2xl font-semibold text-[#FF7A00]">
-              {sponsor.name}
-            </p>
-            <p className="text-sm md:text-base text-[#4A2C00]/70 mt-2">
-              {sponsor.role}
-            </p>
-          </motion.div>
-        ))}
+      <div className="text-center mb-10">
+        <motion.h2
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-3xl md:text-4xl font-bold text-[#FF7A00]"
+        >
+          Sponsors & Partners
+        </motion.h2>
       </div>
 
-      {/* MODAL */}
-      <AnimatePresence>
-        {selectedSponsor && (
+      {/* SLIDER WITH BUTTONS */}
+      <div className="relative flex items-center justify-center w-full px-6 md:px-12">
+
+        {/* LEFT BUTTON */}
+        <button
+          onClick={() => move(-1)}
+          className="absolute left-0 md:left-4 p-3 rounded-full bg-[#FFE3CC] hover:bg-[#FFD1B0] shadow-md z-20 transition-all"
+        >
+          <ChevronLeft className="h-6 w-6 text-[#FF7A00]" />
+        </button>
+
+        {/* VIEW WINDOW */}
+        <div className="overflow-hidden w-full max-w-7xl">
           <motion.div
-            className="fixed inset-0 bg-black/60 backdrop-blur-md flex justify-center items-center p-4 z-50"
-            onClick={() => setSelectedSponsor(null)}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            animate={{ x: -(pos * CARD_WIDTH) }}
+            transition={{ duration: 0.35, ease: "easeInOut" }}
+            className="flex gap-6"
+            style={{ width: extended.length * CARD_WIDTH }}
           >
-            <motion.div
-              className="relative w-full max-w-lg p-8 rounded-2xl shadow-2xl bg-gradient-to-br from-[#FFDAB8] via-[#FFE7CC] to-[#FFF8EF] border border-[#FF7A00]/60 max-h-[75vh] overflow-y-auto"
-              initial={{ scale: 0.5 }}
-              animate={{ scale: 1 }}
-              exit={{ scale: 0.7 }}
-              transition={{ duration: 0.35 }}
-              onClick={(e) => e.stopPropagation()}
-            >
-              {/* CLOSE */}
-              <button
-                onClick={() => setSelectedSponsor(null)}
-                className="absolute top-4 right-4 text-[#FF7A00] hover:text-[#E76E00]"
+            {extended.map((item, index) => (
+              <motion.div
+                key={index}
+                whileHover={{ scale: 1.04 }}
+                transition={{ duration: 0.25 }}
+                className="
+                  w-[300px] sm:w-[340px] md:w-[380px]
+                  bg-gradient-to-br from-[#FFF2E6] to-[#FFE1CC]
+                  border border-[#FF7A00]/40
+                  rounded-2xl p-6 shadow-md cursor-pointer
+                  hover:shadow-xl transition-all
+                "
               >
-                <X className="h-6 w-6" />
-              </button>
+                <motion.p
+                  className="text-lg sm:text-xl md:text-2xl font-semibold text-[#FF7A00]"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  {item.name}
+                </motion.p>
 
-              {/* MODAL CONTENT */}
-              <h2 className="text-2xl font-bold text-center text-[#FF7A00] mb-4">
-                {selectedSponsor.name}
-              </h2>
-              <p className="text-sm text-[#4A2C00] text-center mb-4">
-                <span className="font-semibold text-[#FF7A00]">Role:</span>{" "}
-                {selectedSponsor.role}
-              </p>
-
-              {selectedSponsor.website && (
-                <div className="flex justify-center">
-                  <motion.a
-                    href={selectedSponsor.website}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="flex items-center gap-2 bg-[#FF7A00] hover:bg-[#E76E00] px-6 py-2 rounded-full text-white text-sm shadow-md"
-                    whileHover={{ scale: 1.05 }}
-                  >
-                    Visit Website <ExternalLink className="h-4 w-4" />
-                  </motion.a>
-                </div>
-              )}
-            </motion.div>
+                <motion.p
+                  className="text-xs sm:text-sm md:text-base text-[#4A2C00]/70 mt-2"
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  {item.role}
+                </motion.p>
+              </motion.div>
+            ))}
           </motion.div>
-        )}
-      </AnimatePresence>
+        </div>
+
+        {/* RIGHT BUTTON */}
+        <button
+          onClick={() => move(1)}
+          className="absolute right-0 md:right-4 p-3 rounded-full bg-[#FFE3CC] hover:bg-[#FFD1B0] shadow-md z-20 transition-all"
+        >
+          <ChevronRight className="h-6 w-6 text-[#FF7A00]" />
+        </button>
+      </div>
+
+      {/* DOTS */}
+      <div className="flex justify-center mt-6 gap-2">
+        {sponsors.map((_, i) => {
+          const active = (pos % sponsors.length) === i;
+
+          return (
+            <div
+              key={i}
+              onClick={() => goToSlide(i)}
+              className={`
+                h-2 w-2 rounded-full cursor-pointer transition-all duration-300
+                ${active ? "bg-[#FF7A00] scale-125" : "bg-[#FFC9A0]"}
+              `}
+            ></div>
+          );
+        })}
+      </div>
     </motion.section>
   );
 }

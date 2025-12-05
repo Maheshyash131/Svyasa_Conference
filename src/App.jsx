@@ -9,7 +9,7 @@ import TracksSection from "./components/TracksSection";
 import InstitutionSection from "./components/InstitutionSection";
 import TimelineSection from "./components/TimelineSection";
 import CommitteeSection from "./components/CommitteeSection";
-import SponsorsSection from "./components/SponsorsSection";
+// import SponsorsSection from "./components/SponsorsSection";
 import RegistrationSection from "./components/RegistrationSection";
 import ContactSection from "./components/ContactSection";
 import Footer from "./components/Footer";
@@ -24,12 +24,12 @@ export default function App() {
       <main className="w-full">
         <HeroSection />
         <AboutSection />
-        <TracksSection />
         <InstitutionSection />
+        <TracksSection />
         <PaperSubmission />
         <TimelineSection />
         <CommitteeSection />
-        <SponsorsSection />
+        {/* <SponsorsSection /> */}
         <RegistrationSection />
         <ContactSection />
       </main>

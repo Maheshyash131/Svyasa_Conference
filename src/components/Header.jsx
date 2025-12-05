@@ -7,7 +7,8 @@ const navItems = [
   { label: "Home", href: "#home" },
   { label: "About", href: "#about" },
   { label: "Tracks", href: "#tracks" },
-  { label: "Timeline", href: "#timeline" },
+  { label: "Paper Submission", href: "#paper-guidelines" },
+  { label: "Important Dates", href: "#timeline" },
   { label: "Committee", href: "#committee" },
   { label: "Registration", href: "#registration" },
   { label: "Contact", href: "#contact" },
@@ -21,6 +22,16 @@ export default function Header() {
     return () => (document.body.style.overflow = "auto");
   }, [open]);
 
+  // ⭐ Smooth scroll for both desktop & mobile
+  const handleSmoothScroll = (e, href) => {
+    e.preventDefault();
+    const section = document.querySelector(href);
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+    setOpen(false);
+  };
+
   return (
     <div className="w-full">
       <header
@@ -33,37 +44,35 @@ export default function Header() {
         {/* MAIN HEADER */}
         <div
           className="
-            w-full 
-            max-w-[430px] mx-auto               
-            md:max-w-6xl                        
-            px-4 py-2 flex items-center
+            w-full max-w-[430px] mx-auto
+            md:max-w-6xl
+            px-4 py-2 flex items-center justify-between
           "
         >
+          {/* LOGO */}
           <img
             src={logo}
             alt="Conference Logo"
             className="h-12 w-auto object-contain rounded-lg shadow-lg shadow-[#FF7A00]/40"
           />
 
+          {/* CENTERED TITLE (Mobile centered, desktop left) */}
           <div
-            className="
-              flex flex-col justify-center items-center mx-auto
-              md:items-start md:mx-0 md:ml-3 md:text-left
-            "
+           className="absolute left-1/2 transform -translate-x-1/2 md:static md:transform-none text-center"
+
           >
-            <span className="font-semibold text-base md:text-lg text-[#FF7A00]">
-              SITCES-2025
-            </span>
-            <span className="text-[10px] md:text-xs text-[#4A2C00]">
-              Int’l Conference on Sustainable Innovation
+            <span className="font-semibold text-base md:text-lg  text-[#FF7A00]">
+              ICCSI-2026
             </span>
           </div>
 
+          {/* DESKTOP NAV */}
           <nav className="hidden md:flex items-center gap-6 ml-auto text-sm">
             {navItems.map((item) => (
               <a
                 key={item.href}
                 href={item.href}
+                onClick={(e) => handleSmoothScroll(e, item.href)}
                 className="
                   text-[#4A2C00] font-medium 
                   px-3 py-1 rounded-full
@@ -84,7 +93,11 @@ export default function Header() {
             "
             onClick={() => setOpen(!open)}
           >
-            {open ? <X className="text-[#FF7A00]" /> : <Menu className="text-[#FF7A00]" />}
+            {open ? (
+              <X className="text-[#FF7A00]" />
+            ) : (
+              <Menu className="text-[#FF7A00]" />
+            )}
           </button>
         </div>
       </header>
@@ -92,7 +105,7 @@ export default function Header() {
       {/* PUSH CONTENT DOWN */}
       <div className="mt-20 w-full max-w-[430px] mx-auto md:max-w-6xl"></div>
 
-      {/* MOBILE MENU */}
+      {/* MOBILE HORIZONTAL SCROLL MENU (same as your old design) */}
       {open && (
         <nav
           className="
@@ -102,8 +115,7 @@ export default function Header() {
         >
           <div
             className="
-              max-w-[430px] mx-auto
-              md:max-w-6xl
+              max-w-[430px] mx-auto md:max-w-6xl
               px-3 py-2 flex gap-3 text-sm overflow-x-auto
             "
           >
@@ -111,7 +123,7 @@ export default function Header() {
               <a
                 key={item.href}
                 href={item.href}
-                onClick={() => setOpen(false)}
+                onClick={(e) => handleSmoothScroll(e, item.href)}
                 className="
                   px-3 py-2 whitespace-nowrap font-medium
                   text-[#4A2C00] hover:bg-[#FFA733]/40 hover:text-[#FF7A00]

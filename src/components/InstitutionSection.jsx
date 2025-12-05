@@ -50,7 +50,7 @@ export default function InstitutionSection() {
           <div
             className="
               rounded-3xl overflow-hidden shadow-md shadow-[#FF7A00]/30 w-full
-              h-[330px]                    /* 🔥 MOBILE BIG — NO CONGESTION */
+              min-h-[330px] h-auto                 /* 🔥 MOBILE BIG — NO CONGESTION */
               md:aspect-[4/3] md:h-full   /* 🔥 DESKTOP UNCHANGED */
               hover:-translate-y-1 transition-all duration-300
             "
@@ -74,12 +74,12 @@ export default function InstitutionSection() {
               relative rounded-3xl border border-[#FF7A00]
               bg-gradient-to-br from-[#FFF0DB] via-[#FFD9B8] to-[#FFF5E6]
               shadow-xl overflow-hidden transition-all duration-300
-              h-[330px]                    /* 🔥 SPACIOUS MOBILE */
+              min-h-[330px] h-auto                    /* 🔥 SPACIOUS MOBILE */
               md:aspect-[4/3] md:h-full   /* 🔥 DESKTOP SAME */
               hover:-translate-y-1 hover:shadow-[#FF7A00]/40
             "
           >
-            <div className="h-full flex flex-col justify-between p-6">
+            <div className="h-auto flex flex-col justify-between p-6">
 
               {/* HEADING */}
               <div className="space-y-4">
@@ -89,13 +89,13 @@ export default function InstitutionSection() {
                   </span>
                   <div>
                     <p className="text-xs uppercase tracking-[0.2em] text-[#FF7A00]">Campus Overview</p>
-                    <p className="text-sm font-semibold text-[#4A2C00]">Faculty of Engineering, SVYASA</p>
+                    <p className="text-sm font-semibold text-[#4A2C00]">School of Advanced Studies, S-VYASA (Deemed to be University)</p>
                   </div>
                 </div>
 
                 {/* TABS */}
                 <div className="inline-flex rounded-full bg-[#FFE7CC] border border-[#FF7A00]/50 p-1 text-[0.7rem]">
-                  {["campus", "facilities", "labs"].map((tab) => (
+                  {["campus", "Highlights", "yoga"].map((tab) => (
                     <button
                       key={tab}
                       onClick={() => setActiveTab(tab)}
@@ -113,27 +113,29 @@ export default function InstitutionSection() {
                 {/* TAB CONTENT */}
                 <motion.div key={activeTab} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
                   {activeTab === "campus" && (
-                    <ul className="space-y-1 text-[11px] sm:text-sm">
-                      <li>• Green & Serene Campus</li>
-                      <li>• Holistic Education Environment</li>
-                      <li>• Industry-focused Programs</li>
-                      <li>• Strong Research Culture</li>
+                    <ul className="space-y-3 text-[11px] sm:text-sm">
+                   <li>• Discover the transformative power of education at S-VYASA.</li> 
+                   <li>• Explore diverse programs, from undergraduate to Ph.D., that blend tradition with modern advancements.</li>
+                   <li>• At S-VYASA University, we prepare you to launch your career by providing a supportive, creative, and professional environment.</li>
+                   <li>• Learn practical skills, build a network of industry contacts, and gain real-world experience.</li>
                     </ul>
                   )}
-                  {activeTab === "facilities" && (
-                    <ul className="space-y-1 text-[11px] sm:text-sm">
-                      <li>• Smart classrooms</li>
-                      <li>• Central Library</li>
-                      <li>• Conference halls</li>
-                      <li>• Hostel & cafeteria</li>
+                  {activeTab === "Highlights" && (
+                    <ul className="space-y-3 text-[11px] sm:text-sm">
+                      <li>• Programs for Every Passion – From AI to Clinical Psychology, discover programs tailored to industry demands.</li>
+                      <li>• Campus Advantage – Located in Sattva Global City IT Park for unparalleled industry exposure.</li>
+                      <li>• Holistic Approach – Integration of yoga, wellness, and academic excellence for balanced learning.</li>
+                      <li>• Global Opportunities – Industry partnerships ensuring top placements and internships.</li>
+
                     </ul>
                   )}
-                  {activeTab === "labs" && (
-                    <ul className="space-y-1 text-[11px] sm:text-sm">
-                      <li>• Advanced Computing Lab</li>
-                      <li>• Electronics & Embedded Labs</li>
-                      <li>• Research Clusters</li>
-                      <li>• Innovation Labs</li>
+                  {activeTab === "yoga" && (
+                    <ul className="space-y-3 text-[11px] sm:text-sm">
+                     <li>• S-VYASA University is committed to promoting Yoga and Wellness as a core part of academic and campus life.</li>
+                     <li>• The university blends ancient yogic traditions with modern scientific research to provide a structured approach to holistic health.</li>
+                     <li>• Students are encouraged to embrace yoga not just as a practice but as a way of life.</li>
+                     <li>• This approach fosters physical, mental, and spiritual well-being.</li>
+
                     </ul>
                   )}
                 </motion.div>

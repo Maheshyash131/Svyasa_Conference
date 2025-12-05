@@ -1,149 +1,163 @@
 // src/components/TracksSection.jsx
-import React, { useState, useEffect } from "react";
-import { conferenceData } from "../mockData";
-import { X, ArrowRight } from "lucide-react";
+import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { conferenceData } from "../mockData";
+import { X } from "lucide-react";
 
 export default function TracksSection() {
-  const [selectedTrack, setSelectedTrack] = useState(null);
-
-  // Disable scroll when modal opens
-  useEffect(() => {
-    document.body.style.overflow = selectedTrack ? "hidden" : "auto";
-    return () => (document.body.style.overflow = "auto");
-  }, [selectedTrack]);
+  const [activeTrack, setActiveTrack] = useState(null);
 
   return (
-    <motion.section
-      id="tracks"
-      className="bg-[#FFE9D6] text-[#4A2C00] pt-8 pb-6 sm:pt-10 sm:pb-10 md:pt-12 md:pb-14"
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ amount: 0.2 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
-    >
-      <div className="max-w-[430px] md:max-w-6xl mx-auto px-4">
-        
-        {/* TITLE */}
-        <motion.div
-          className="text-center mb-6 sm:mb-8 md:mb-10"
-          initial={{ opacity: 0, y: -30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          <h2 className="text-3xl md:text-4xl font-bold text-[#FF7A00]">
+    <>
+      <motion.section
+        id="tracks"
+        style={{ scrollMarginTop: "90px" }}
+        className="bg-[#FFE9D6] text-[#4A2C00] pt-20 pb-24 relative overflow-hidden"
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+      >
+        <div className="max-w-7xl mx-auto px-4 relative z-10">
+
+          {/* TITLE */}
+          <motion.h2
+            className="text-3xl md:text-4xl font-bold text-[#FF7A00] drop-shadow-md text-center"
+            initial={{ opacity: 0, y: -20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+          >
             Conference Tracks
-          </h2>
-        </motion.div>
+          </motion.h2>
 
-        {/* TRACK CARDS */}
-        <div className="grid gap-4 sm:gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
-          {conferenceData.tracks.map((track, index) => (
-            <motion.div
-              key={track.id}
-              onClick={() => setSelectedTrack(track)}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-16">
+            {conferenceData.tracks.slice(0, 2).map((track, index) => (
+              <motion.div
+                key={track.id}
+                initial={{ opacity: 0, y: 60 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.2 }}
+                whileHover={{
+                  scale: 1.04,
+                  y: -10,
+                  boxShadow: "0 22px 40px rgba(255,122,0,0.35)",
+                }}
               className="
-                cursor-pointer flex flex-col justify-between
-                bg-gradient-to-br from-[#FFF5EC] to-[#FFD9B3]
-                rounded-3xl border border-[#FF7A00]/50 shadow-lg hover:shadow-xl transition-all duration-300
-                w-[90%] mx-auto sm:w-full   /* 🔥 FIXED WIDTH ONLY FOR MOBILE */
-                p-4 sm:p-5 md:p-7
-                md:min-h-[250px]      /* 🔥 HEIGHT SAME AS BEFORE */
-              "
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.45, delay: index * 0.12 }}
-              viewport={{ once: false, amount: 0.2 }}
-              whileHover={{ scale: 1.03 }}
-            >
-              <div>
-                <span className="inline-block bg-[#FF7A00] px-3 py-[2px] text-[11px] sm:text-xs text-white rounded-full font-semibold">
-                  Track {track.id}
-                </span>
+  relative rounded-2xl p-8 shadow-md border border-[#FF7A00]/30
+  bg-gradient-to-br from-[#FFF5EB] via-[#FFE4C6] to-[#FFD4A6]
+  max-w-md mx-auto
+"
 
-                <h3 className="text-sm sm:text-lg mt-3 sm:mt-4 font-semibold text-[#FF7A00] leading-snug">
-                  {track.title}
-                </h3>
-              </div>
+              >
+                {/* HEADER */}
+                <div>
+                  <span className="inline-block bg-[#FF7A00] text-white px-4 py-1 text-xs font-bold rounded-full shadow-md">
+                    Track {track.id}
+                  </span>
 
-              <p className="text-[11px] sm:text-sm mt-3 text-[#6A5848]">
-                Tap to view more details →
-              </p>
-            </motion.div>
-          ))}
+                  <h3 className="text-2xl font-bold text-[#FF7A00] mt-4">
+                    {track.title}
+                  </h3>
+
+                  <p className="text-[#6A5848] text-sm mt-3 leading-relaxed font-medium">
+                    {track.description}
+                  </p>
+                </div>
+
+                {/* OPEN MODAL BUTTON */}
+                <div className="mt-6 flex justify-center">
+                  <motion.button
+                    onClick={() => setActiveTrack(track)}
+                    className="
+                      bg-[#FF7A00] text-white px-5 py-2 rounded-full 
+                      font-semibold text-sm shadow-md
+                    "
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    View Details
+                  </motion.button>
+                </div>
+
+              </motion.div>
+            ))}
+          </div>
         </div>
-      </div>
+      </motion.section>
 
-      {/* MODAL */}
+      {/* ====================== MODAL POPUP ======================= */}
       <AnimatePresence>
-        {selectedTrack && (
+        {activeTrack && (
           <motion.div
-            className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 px-3"
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm flex justify-center items-center z-[999]"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={() => setSelectedTrack(null)}
           >
             <motion.div
               className="
-                bg-gradient-to-br from-[#FFD9B3] via-[#FFF0E2] to-[#FFD9B3]
-                text-[#4A2C00] rounded-3xl shadow-2xl border border-[#FF7A00]/50
-                w-[85%] max-w-[430px]
-                max-h-[75vh] overflow-y-auto
-                p-4 md:p-6 relative
+                bg-gradient-to-b from-[#FFF2E2] to-[#FFE2C4]
+                rounded-3xl p-10 max-w-2xl w-[92%]
+                shadow-2xl relative overflow-y-auto max-h-[85vh]
+                border border-[#FF7A00]/40
               "
-              initial={{ scale: 0.85, opacity: 0 }}
+              initial={{ scale: 0.7, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.85, opacity: 0 }}
+              exit={{ scale: 0.7, opacity: 0 }}
               transition={{ duration: 0.3 }}
-              onClick={(e) => e.stopPropagation()}
             >
-              <motion.button
-                onClick={() => setSelectedTrack(null)}
-                className="absolute top-3 right-3 text-[#FF7A00] hover:text-[#E76E00]"
-                whileHover={{ scale: 1.15 }}
-                whileTap={{ scale: 0.9 }}
+              {/* CLOSE BUTTON */}
+              <button
+                onClick={() => setActiveTrack(null)}
+                className="absolute top-4 right-4 text-[#FF7A00] hover:text-black transition"
               >
-                <X className="h-6 w-6" />
-              </motion.button>
+                <X className="w-6 h-6" />
+              </button>
 
-              <h2 className="text-base sm:text-lg font-bold mb-2 text-[#FF7A00]">
-                {selectedTrack.title}
+              {/* MODAL CONTENT */}
+              <h2 className="text-3xl font-extrabold text-[#FF7A00] leading-tight mb-3">
+                {activeTrack.title}
               </h2>
 
-              <p className="text-xs sm:text-sm text-[#6A5848] mb-4 leading-relaxed">
-                {selectedTrack.description}
+              <p className="text-sm text-gray-800 leading-relaxed mb-6 font-semibold">
+                {activeTrack.description}
               </p>
 
-              <ul className="space-y-1 text-xs sm:text-sm">
-                {selectedTrack.topics.map((topic, idx) => (
+              <h3 className="text-xl font-bold text-[#FF7A00] mb-4">
+                Topics Covered
+              </h3>
+
+              <ul className="space-y-3">
+                {activeTrack.topics.map((topic, i) => (
                   <motion.li
-                    key={idx}
-                    initial={{ opacity: 0, x: -10 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ delay: idx * 0.05, duration: 0.3 }}
-                    className="flex items-start"
+                    key={i}
+                    className="flex items-start text-[15px] text-gray-900 font-semibold"
+                    initial={{ opacity: 0, x: -15 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.25, delay: i * 0.04 }}
                   >
-                    <span className="text-[#FF7A00] mr-2">•</span>
+                    <span className="text-[#FF7A00] mr-2 text-lg leading-none">•</span>
                     {topic}
                   </motion.li>
                 ))}
               </ul>
 
-              <div className="flex justify-center mt-4">
-                <motion.a
-                  href="#registration"
-                  className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#FF7A00] to-[#E76E00] px-4 py-2 text-xs sm:text-sm font-semibold text-white"
-                  whileHover={{ scale: 1.07 }}
+              <div className="mt-8 flex justify-end">
+                <motion.button
+                  onClick={() => setActiveTrack(null)}
+                  className="
+                    bg-[#FF7A00] text-white px-6 py-2 rounded-full
+                    text-sm font-bold shadow-md
+                  "
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.9 }}
                 >
-                  Proceed to Registration
-                  <ArrowRight className="h-4 w-4" />
-                </motion.a>
+                  Close
+                </motion.button>
               </div>
+
             </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.section>
+    </>
   );
 }

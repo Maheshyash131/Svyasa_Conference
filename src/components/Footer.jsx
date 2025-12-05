@@ -1,25 +1,34 @@
 // src/components/Footer.jsx
 import React from "react";
-import { Mail, Phone, MapPin } from "lucide-react";
+import { Mail, MapPin } from "lucide-react";
 import { conferenceData } from "../mockData";
 import { motion } from "framer-motion";
 
 export default function Footer() {
   const year = new Date().getFullYear();
 
+  // 🔥 Smooth Scroll Handler (same as Header)
+  const handleSmoothScroll = (e, href) => {
+    e.preventDefault();
+    const target = document.querySelector(href);
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
   return (
     <motion.footer
       className="
-        bg-[#FFE9D6]/20 border-t-2 text-[#4A2C00] pt-12 pb-8 
+        bg-[#FFE9D6]/20 border-t-2 text-[#4A2C00] pt-12 pb-8
         overflow-hidden min-h-[30dvh]
       "
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.6, ease: 'easeOut' }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
     >
-      {/* GRID — Desktop 3 columns / Mobile 1 column */}
-      <div className="max-w-6xl mx-auto px-4 grid gap-10 md:grid-cols-3 text-center md:text-left">
+      {/* GRID */}
+      <div className="max-w-6xl mx-auto px-4 grid gap-10 md:grid-cols-3 text-center">
 
         {/* ABOUT */}
         <motion.div
@@ -27,10 +36,9 @@ export default function Footer() {
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <h3 className="text-lg font-bold text-[#FF7A00] mb-3">About SITCES 2025</h3>
-          <p className="text-sm text-[#4A2C00]/80 leading-relaxed">
-            SITCES-2025 is an international conference focused on sustainable
-            innovation, communication technologies, and energy systems — hosted by SVYASA University.
+          <h3 className="text-lg font-bold text-[#FF7A00] mb-3">About ICCSI 2026</h3>
+          <p className="text-sm text-[#4A2C00]/80 font-semibold leading-relaxed">
+           The International Conference on Computational Intelligence and Sustainable Innovation (ICCSI–2026) invites researchers, academicians, and industry professionals to share innovative ideas, methodologies, and technologies contributing to sustainable development through computational intelligence.
           </p>
         </motion.div>
 
@@ -46,10 +54,11 @@ export default function Footer() {
               { label: "Home", href: "#home" },
               { label: "About", href: "#about" },
               { label: "Tracks", href: "#tracks" },
-              { label: "Timeline", href: "#timeline" },
+              { label: "Paper Submission", href: "#paper-guidelines" },
+              { label: "Important Dates", href: "#timeline" },
               { label: "Committee", href: "#committee" },
               { label: "Registration", href: "#registration" },
-              { label: "Contact", href: "#contact" },
+              { label: "Contact", href: "#contact" }
             ].map((item, idx) => (
               <motion.li
                 key={idx}
@@ -60,7 +69,8 @@ export default function Footer() {
               >
                 <a
                   href={item.href}
-                  className="hover:text-[#FF7A00] transition-all duration-200 font-medium"
+                  onClick={(e) => handleSmoothScroll(e, item.href)}
+                  className="hover:text-[#FF7A00] transition-all duration-200 font-medium cursor-pointer"
                 >
                   {item.label}
                 </a>
@@ -70,13 +80,17 @@ export default function Footer() {
         </motion.div>
 
         {/* CONTACT INFO */}
-        <motion.div
-          initial={{ opacity: 0, x: 40 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5 }}
-        >
+       <motion.div
+  className="flex flex-col items-center md:items-start"
+  initial={{ opacity: 0, x: 40 }}
+  whileInView={{ opacity: 1, x: 0 }}
+  transition={{ duration: 0.5 }}
+>
+
           <h3 className="text-lg font-bold text-[#FF7A00] mb-3">Contact Info</h3>
           <ul className="space-y-3 text-sm">
+
+            {/* EMAIL */}
             <li className="flex md:items-center justify-center md:justify-start gap-2">
               <motion.div whileTap={{ scale: 1.2 }}>
                 <Mail className="h-5 w-5 text-[#FF7A00]" />
@@ -89,19 +103,19 @@ export default function Footer() {
               </a>
             </li>
 
-            <li className="flex md:items-center justify-center md:justify-start gap-2">
-              <motion.div whileTap={{ scale: 1.2 }}>
-                <Phone className="h-5 w-5 text-[#FF7A00]" />
-              </motion.div>
-              <span className="font-medium">{conferenceData.phone}</span>
-            </li>
-
+            {/* 📍 ADDRESS SPLIT INTO 3 LINES */}
             <li className="flex items-start justify-center md:justify-start gap-2">
               <motion.div whileTap={{ scale: 1.2 }}>
                 <MapPin className="h-5 w-5 text-[#FF7A00] mt-1" />
               </motion.div>
-              <span className="text-sm font-medium">{conferenceData.contact.address}</span>
+
+              <span className="text-sm font-medium leading-5 text-left">
+                School of Computer Science and Applications <br />
+                S-VYASA (Deemed-to-be-University) <br />
+                Bengaluru, Karnataka, India
+              </span>
             </li>
+
           </ul>
         </motion.div>
       </div>
@@ -114,7 +128,7 @@ export default function Footer() {
         transition={{ duration: 0.5 }}
       >
         <span className="text-xs font-medium tracking-wide text-[#FF7A00]">
-          © {year} SITCES-2025. All rights reserved.
+          ©ICCSI-2026. All rights reserved.
         </span>
       </motion.div>
     </motion.footer>

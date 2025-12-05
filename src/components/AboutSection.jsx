@@ -6,13 +6,11 @@ import { conferenceData } from "../mockData";
 // Images
 import SvyasaImg from "../assets/svasya.png";
 import ScsaImg from "../assets/scsa.png";
-import IaasseImg from "../assets/iaa.png";
 
 export default function AboutSection() {
   const [activeModal, setActiveModal] = useState(null);
-  const imageMap = [SvyasaImg, ScsaImg, IaasseImg];
+  const imageMap = [SvyasaImg, ScsaImg]; // Only two cards
 
-  // Disable body scroll ONLY when modal is open
   useEffect(() => {
     document.body.style.overflow = activeModal ? "hidden" : "auto";
     return () => (document.body.style.overflow = "auto");
@@ -23,7 +21,7 @@ export default function AboutSection() {
       id="about"
       className="bg-[#FFE9D6] text-[#4A2C00] py-16 md:py-20"
     >
-      <div className="max-w-6xl mx-auto px-4 sm:px-6">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6">
 
         {/* TITLE */}
         <motion.div
@@ -40,7 +38,7 @@ export default function AboutSection() {
 
         {/* DESCRIPTION */}
         <motion.p
-          className="max-w-3xl mx-auto text-sm md:text-base text-[#6A5848] text-center px-2 leading-relaxed"
+          className="max-w-3xl mx-auto text-sm md:text-base font-semibold text-[#6A5848] text-center px-2 leading-relaxed"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ amount: 0.3 }}
@@ -48,46 +46,73 @@ export default function AboutSection() {
         >
           {conferenceData.about.description}
         </motion.p>
-
-        {/* IMAGE CARDS */}
-        <div
-          className="
-            grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3
-            gap-6 md:gap-8 justify-center mt-10
-          "
+      <br />
+         <motion.p
+          className="max-w-3xl mx-auto text-sm md:text-base font-bold text-[#6A5848] text-center px-2 leading-relaxed"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ amount: 0.3 }}
+          transition={{ duration: 0.7, delay: 0.2 }}
         >
-          {conferenceData.about.sections.map((item, index) => (
+          {conferenceData.about.highlight}
+        </motion.p>
+
+
+
+        {/* CENTERED TWO CARD LAYOUT */}
+        <div className="flex justify-center gap-10 mt-12 flex-wrap">
+
+          {conferenceData.about.sections.slice(0, 2).map((item, index) => (
             <motion.div
               key={index}
-              onClick={() => setActiveModal({ ...item, img: imageMap[index] })}
+              onClick={() =>
+                setActiveModal({ ...item, img: imageMap[index] })
+              }
               className="
                 cursor-pointer rounded-3xl overflow-hidden border border-[#FF7A00]/40
-                shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1
+                shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1
                 bg-gradient-to-br from-[#FFF5EC] to-[#FFD9B3]
-                
-                /* MOBILE FIX */
-                w-full max-w-[320px] mx-auto 
-
-                /* DESKTOP SAME AS BEFORE */
-                md:max-w-none
+                w-[320px] flex flex-col
               "
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ amount: 0.3 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
             >
-              {/* IMAGE SIZE FIX FOR MOBILE */}
-              <img
-                src={imageMap[index]}
-                alt={item.title}
-                className="w-full h-36 md:h-40 object-cover"
-              />
+              {/* IMAGE */}
+              <div className="w-full flex justify-center bg-white py-6">
+                <img
+                  src={imageMap[index]}
+                  alt={item.title}
+                  className="h-48 object-contain"
+                />
+              </div>
 
-              <div className="p-3 text-center text-sm font-semibold text-[#800000]">
-                {item.title}
+              {/* FIXED HEIGHT TITLE AREA FOR PERFECT ALIGNMENT */}
+              {/* <div className="h-20 flex items-center justify-center px-4 text-center">
+                <span className="text-base font-semibold text-[#800000]">
+                  {item.title}
+                </span>
+              </div> */}
+
+              {/* BUTTON INSIDE CONTAINER — CENTERED */}
+              <div className="pb-4 flex justify-center mt-4">
+                <button
+                  onClick={() =>
+                    setActiveModal({ ...item, img: imageMap[index] })
+                  }
+                  className="
+                    px-4 py-2 
+                    bg-[#FF7A00] text-white font-medium rounded-full 
+                    hover:bg-[#E76E00] transition-all shadow
+                  "
+                >
+                  Click to know more
+                </button>
               </div>
             </motion.div>
           ))}
+
         </div>
       </div>
 

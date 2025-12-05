@@ -35,7 +35,8 @@ export default function CommitteeSection() {
     <motion.section
       id="committee"
       ref={sectionRef}
-      className="bg-[#FFE9D6] text-[#4A2C00] pt-10 pb-12"
+      style={{ scrollMarginTop: "110px" }}   // 🔥 FIX 1: Scroll from top
+      className="bg-[#FFE9D6] text-[#4A2C00] pt-10 pb-20"  // 🔥 FIX 2: Added bottom spacing
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: false, amount: 0.3 }}
@@ -61,7 +62,7 @@ export default function CommitteeSection() {
               key={idx}
               onClick={() => setSelectedDepartment({ title, members })}
               className="
-                cursor-pointer p-6 rounded-3xl 
+                cursor-pointer p-6 rounded-3xl text-center
                 bg-[#FFE0C4] shadow-md border border-[#FF8C00]/50 
                 hover:shadow-lg hover:scale-[1.03] transition-all duration-300
               "
@@ -70,7 +71,7 @@ export default function CommitteeSection() {
               transition={{ duration: 0.4, delay: idx * 0.05 }}
             >
               <h3 className="text-lg font-semibold text-center text-[#FF7A00]">
-                {title.replace(/([A-Z])/g, " $1").toUpperCase()}
+                {title.replace(/(?!^)([A-Z])/g, " $1").toUpperCase()}
               </h3>
             </motion.div>
           ))}
@@ -137,11 +138,24 @@ export default function CommitteeSection() {
                     animate={{ opacity: 1, y: 0 }}
                   >
                     <p className="text-sm font-semibold">{member.name}</p>
+
+                    {/* PROFESSION (optional) */}
                     {member.profession && (
-                      <p className="text-xs text-[#FF7A00] font-medium">{member.profession}</p>
+                      <p className="text-xs text-[#6A3A00]  font-medium">{member.profession}</p>
                     )}
+
+                    {/* COLLEGE SPLIT INTO MULTIPLE LINES */}
                     {member.college && (
-                      <p className="text-xs text-gray-600">{member.college}</p>
+                      <div className="mt-1">
+                        {member.college.split(",").map((line, i) => (
+                          <p
+                            key={i}
+                            className="text-xs font-semibold text-[#FF7A00]"
+                          >
+                            {line.trim()}
+                          </p>
+                        ))}
+                      </div>
                     )}
                   </motion.div>
                 ))}

@@ -18,7 +18,8 @@ export default function RegistrationSection() {
   return (
     <motion.section
       id="registration"
-      className="bg-[#FFE9D6] text-[#4A2C00] pb-8"   // 🚀 FIXED – removed min-h + reduced space
+      style={{ scrollMarginTop: "110px" }}   // ⭐ FIX: show from top on navigate
+      className="bg-[#FFE9D6] text-[#4A2C00] pt-20 pb-12"
       initial={{ opacity: 0, y: 60 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -41,6 +42,7 @@ export default function RegistrationSection() {
 
         {/* GRID */}
         <div className="grid gap-10 md:grid-cols-[2fr,1.3fr] items-start">
+          
           {/* LEFT CARD */}
           <motion.div
             className="rounded-2xl border border-[#FF7A00]/50 bg-gradient-to-br 
@@ -108,29 +110,25 @@ export default function RegistrationSection() {
               ))}
             </ul>
 
-            <div className="text-center">
-              <a
-                href={registrationLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-full bg-[#FF7A00] 
-                           hover:bg-[#E76E00] px-5 py-2 text-xs font-semibold text-white shadow-md"
-              >
-                Register on EasyChair
-              </a>
-            </div>
+            {/* ❌ REMOVED Register on EasyChair button (AS REQUESTED) */}
           </motion.div>
         </div>
 
-        {/* BUTTON FIXED (NO EMPTY SPACE BELOW) */}
+        {/* BUTTON */}
         <motion.div
-          className="text-center mt-6 mb-2"   // 🔥 final spacing
+          className="text-center mt-6 mb-2"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
           <button
-            onClick={() => setShowGuidelines(true)}
+            onClick={() => {
+              // ⭐ Navigate to PaperSubmission
+              document.querySelector("#paper-guidelines")?.scrollIntoView({
+                behavior: "smooth",
+                block: "start",
+              });
+            }}
             className="rounded-full bg-gradient-to-r from-[#FF7A00] to-[#E76E00] 
                        px-6 py-2 text-sm font-semibold text-white shadow-md hover:scale-105"
           >
@@ -138,44 +136,6 @@ export default function RegistrationSection() {
           </button>
         </motion.div>
       </div>
-
-      {/* MODAL (UNCHANGED) */}
-      <AnimatePresence>
-        {showGuidelines && (
-          <motion.div
-            className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setShowGuidelines(false)}
-          >
-            <motion.div
-              className="bg-gradient-to-br from-[#FFE4CC] via-[#FFF5EA] to-[#FFE4CC] rounded-3xl 
-                         w-[90%] max-w-[600px] h-[75vh] overflow-y-auto shadow-2xl p-6 
-                         border border-[#FF7A00]/50 relative"
-              initial={{ scale: 0.85 }}
-              animate={{ scale: 1 }}
-              exit={{ scale: 0.85 }}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <button
-                onClick={() => setShowGuidelines(false)}
-                className="absolute top-4 right-4 text-[#FF7A00]"
-              >
-                <X className="h-6 w-6" />
-              </button>
-
-              <h2 className="text-2xl font-bold text-center text-[#FF7A00] mb-4">
-                Submission Guidelines
-              </h2>
-
-              <ul className="text-sm list-disc pl-5 space-y-1">
-                {indexing.services.map((service, i) => <li key={i}>{service}</li>)}
-              </ul>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </motion.section>
   );
 }

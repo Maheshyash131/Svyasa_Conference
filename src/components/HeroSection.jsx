@@ -58,8 +58,8 @@ export default function HeroSection() {
       >
         <div
           className="
-            max-w-[430px] md:max-w-6xl w-full mx-auto px-4 
-            py-6 md:py-12  
+            w-full max-w-7xl mx-auto px-4
+            py-2 md:py-7  
             grid gap-6 md:gap-14 grid-cols-1 md:grid-cols-2 items-start
           "
         >
@@ -105,19 +105,18 @@ export default function HeroSection() {
               <span>{conferenceData.title.split(" ").slice(1).join(" ")}</span>
             </h1>
 
-            <p className="text-sm sm:text-base text-[#4A2C00]/80 leading-relaxed max-w-xl">
+            <p className="text-sm sm:text-base text-[#4A2C00]/80 font-semibold leading-relaxed max-w-2xl">
               {conferenceData.about.description}
+            </p>
+
+            <p className="text-sm sm:text-base text-[#4A2C00] font-semibold leading-relaxed max-w-2xl">
+              {conferenceData.about.highlight}
             </p>
 
             <div className="flex flex-wrap gap-3 text-sm">
               <div className="flex items-center gap-2 bg-[#FFF5EC] border border-[#FF7A00]/50 rounded-full px-3 py-1">
                 <Calendar className="h-4 w-4 text-[#FF7A00]" />
                 <span className="font-semibold text-[#FF7A00]">{conferenceData.dates}</span>
-              </div>
-
-              <div className="flex items-center gap-2 bg-[#FFF5EC] border border-[#FF7A00]/50 rounded-full px-3 py-1">
-                <MapPin className="h-4 w-4 text-[#FF7A00]" />
-                <span className="font-semibold text-[#FF7A00]">{conferenceData.location}</span>
               </div>
 
               <div className="flex items-center gap-2 bg-[#FFF5EC] border border-[#FF7A00]/50 rounded-full px-3 py-1">
@@ -128,7 +127,15 @@ export default function HeroSection() {
               </div>
             </div>
 
-            {/* BUTTONS — SINGLE ROW ON MOBILE 👇 */}
+            <div className="inline-flex gap-2 bg-[#FFF5EC] border border-[#FF7A00]/50 rounded-3xl px-3 py-1 items-center w-fit">
+                <MapPin className="h-4 w-4 text-[#FF7A00]" />
+                   <span className="font-semibold text-[#FF7A00] whitespace-pre-line leading-tight pt-[1px]">
+                       {conferenceData.location}
+                  </span>
+            </div>
+
+
+            {/* BUTTONS */}
             <div className="flex flex-row gap-3 pt-4 w-full">
               <button
                 onClick={scrollToRegistration}
