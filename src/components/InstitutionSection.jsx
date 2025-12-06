@@ -50,7 +50,7 @@ export default function InstitutionSection() {
           <div
             className="
               rounded-3xl overflow-hidden shadow-md shadow-[#FF7A00]/30 w-full
-              min-h-[330px] h-auto                 /* 🔥 MOBILE BIG — NO CONGESTION */
+              h-auto               /* 🔥 MOBILE BIG — NO CONGESTION */
               md:aspect-[4/3] md:h-full   /* 🔥 DESKTOP UNCHANGED */
               hover:-translate-y-1 transition-all duration-300
             "
@@ -74,7 +74,7 @@ export default function InstitutionSection() {
               relative rounded-3xl border border-[#FF7A00]
               bg-gradient-to-br from-[#FFF0DB] via-[#FFD9B8] to-[#FFF5E6]
               shadow-xl overflow-hidden transition-all duration-300
-              min-h-[330px] h-auto                    /* 🔥 SPACIOUS MOBILE */
+              h-auto                    /* 🔥 SPACIOUS MOBILE */
               md:aspect-[4/3] md:h-full   /* 🔥 DESKTOP SAME */
               hover:-translate-y-1 hover:shadow-[#FF7A00]/40
             "
